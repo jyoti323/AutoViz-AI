@@ -1,6 +1,10 @@
 ﻿import streamlit as st
 import pandas as pd
-import plotly.express as px
+
+try:
+    import plotly.express as px
+except ModuleNotFoundError:
+    px = None
 
 st.set_page_config(
     page_title="AutoViz AI",
@@ -63,6 +67,13 @@ if uploaded_file is not None:
     # Read CSV
     df = pd.read_csv(uploaded_file)
 
+    if px is None:
+        st.error(
+            "Plotly is not installed in the current Python environment. "
+            "Please install it with `python -m pip install plotly` or use the venv in this project."
+        )
+        st.stop()
+
     # Dataset preview
     st.subheader("Dataset Preview")
     st.dataframe(df)
@@ -80,7 +91,7 @@ if uploaded_file is not None:
 
     # Detect columns
     numeric_columns = df.select_dtypes(include=['number']).columns
-    categorical_columns = df.select_dtypes(include=['object']).columns
+    categorical_columns = df.select_dtypes(include=['object', 'category', 'string']).columns
 
     # Show column types
     st.subheader("Numeric Columns")
