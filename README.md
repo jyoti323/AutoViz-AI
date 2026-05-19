@@ -41,6 +41,6 @@ Then open the local URL shown in the terminal.
 - Upload a CSV file to enable dataset preview and plotting
 - The app creates a scatter plot only if at least two numeric columns are present
 
-  ##Deplo link:
+##Deplo link:
 
   https://jyoti323-autoviz-ai-app-svfbds.streamlit.app/
