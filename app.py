@@ -162,6 +162,8 @@ def apply_theme_css():
         [data-testid="stExpander"] {{ border: 1px solid {card_border}; background: {card_bg}; }}
         [data-baseweb="tab"][aria-selected="true"] {{ color: #C9A96E !important; }}
         [data-baseweb="tab-highlight"] {{ background-color: #C9A96E !important; }}
+        [data-testid="stPlotlyChart"] {{ transition: border-color .2s ease, box-shadow .2s ease; }}
+        [data-testid="stPlotlyChart"]:hover {{ border-color: rgba(201,169,110,.42); box-shadow: 0 10px 28px rgba(0,0,0,.10); }}
         @media (prefers-reduced-motion: reduce) {{ *, *::before, *::after {{ animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }} }}
         </style>
     """, unsafe_allow_html=True)
