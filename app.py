@@ -168,6 +168,7 @@ def apply_theme_css():
         div[data-testid="stFileUploader"]:hover {{ border-color: #C9A96E !important; }}
         [data-testid="stDataFrame"], [data-testid="stTable"] {{ border-radius: 12px; overflow: hidden; }}
         [data-testid="stVerticalBlock"] > [data-testid="stElementContainer"] {{ scroll-margin-top: 1rem; }}
+        @media (max-width: 720px) {{ .glowing-title {{ font-size: 2rem !important; }} .title-container {{ margin-bottom: 20px; }} }}
         @media (prefers-reduced-motion: reduce) {{ *, *::before, *::after {{ animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }} }}
         </style>
     """, unsafe_allow_html=True)
