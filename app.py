@@ -154,6 +154,8 @@ def apply_theme_css():
         input:focus, textarea:focus {{ border-color: #C9A96E !important; box-shadow: 0 0 0 1px rgba(201,169,110,.22) !important; }}
         [data-testid="stRadio"] input {{ accent-color: #C9A96E; }}
         [data-testid="stCheckbox"] input {{ accent-color: #C9A96E; }}
+        [data-testid="stToggle"] {{ transition: filter .2s ease; }}
+        [data-testid="stToggle"]:hover {{ filter: brightness(1.12); }}
         @media (prefers-reduced-motion: reduce) {{ *, *::before, *::after {{ animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }} }}
         </style>
     """, unsafe_allow_html=True)
