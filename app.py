@@ -172,6 +172,7 @@ def apply_theme_css():
         @media (max-width: 720px) {{ [data-testid="stPlotlyChart"] {{ padding: 4px; border-radius: 12px; }} .metric-card {{ padding: 16px; }} }}
         .metric-lbl {{ transition: color .2s ease; }}
         .metric-card:hover .metric-lbl {{ color: {text_color}; }}
+        section[data-testid="stSidebar"] h2 {{ letter-spacing: -.02em; }}
         @media (prefers-reduced-motion: reduce) {{ *, *::before, *::after {{ animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }} }}
         </style>
     """, unsafe_allow_html=True)
