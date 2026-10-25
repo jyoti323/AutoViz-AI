@@ -164,6 +164,8 @@ def apply_theme_css():
         [data-baseweb="tab-highlight"] {{ background-color: #C9A96E !important; }}
         [data-testid="stPlotlyChart"] {{ transition: border-color .2s ease, box-shadow .2s ease; }}
         [data-testid="stPlotlyChart"]:hover {{ border-color: rgba(201,169,110,.42); box-shadow: 0 10px 28px rgba(0,0,0,.10); }}
+        div[data-testid="stFileUploader"] {{ transition: border-color .2s ease, background .2s ease; }}
+        div[data-testid="stFileUploader"]:hover {{ border-color: #C9A96E !important; }}
         @media (prefers-reduced-motion: reduce) {{ *, *::before, *::after {{ animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }} }}
         </style>
     """, unsafe_allow_html=True)
