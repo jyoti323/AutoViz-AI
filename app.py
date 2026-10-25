@@ -148,6 +148,7 @@ def apply_theme_css():
         section[data-testid="stSidebar"] {{ background-color: {sidebar_bg} !important; border-right: 1px solid {card_border} !important; }}
         section[data-testid="stSidebar"] h2 {{ font-family: 'Playfair Display', Georgia, serif; }}
         hr {{ border-color: {card_border} !important; margin: 22px 0 !important; }}
+        .stButton>button:focus-visible, .stDownloadButton>button:focus-visible {{ outline: 2px solid #C9A96E !important; outline-offset: 3px; }}
         @media (prefers-reduced-motion: reduce) {{ *, *::before, *::after {{ animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }} }}
         </style>
     """, unsafe_allow_html=True)
