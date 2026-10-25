@@ -115,179 +115,74 @@ def delete_user_file(username, filename):
 
 # Custom Styling Injection (Theme Aware)
 def apply_theme_css():
-    if st.session_state.theme == "Dark":
-        bg_color = "#0F1319"
-        text_color = "#E2E8F0"
-        card_bg = "rgba(22, 28, 38, 0.6)"
-        card_border = "rgba(255, 255, 255, 0.05)"
-        sidebar_bg = "#070A10"
-        st.markdown(f"""
-            <style>
-            @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
-            html, body, [class*="css"], .stApp {{
-                font-family: 'Outfit', sans-serif;
-                background-color: {bg_color} !important;
-                color: {text_color} !important;
-            }}
-            .title-container {{
-                text-align: center;
-                margin: 15px 0 25px 0;
-            }}
-            .glowing-title {{
-                font-size: 2.5rem !important;
-                font-weight: 700 !important;
-                background: linear-gradient(90deg, #00F2FE 0%, #D946EF 100%);
-                -webkit-background-clip: text;
-                -webkit-text-fill-color: transparent;
-            }}
-            .subtitle {{
-                font-size: 0.95rem;
-                color: #94A3B8;
-                font-weight: 300;
-            }}
-            .metric-card {{
-                background: {card_bg};
-                border: 1px solid {card_border};
-                border-radius: 12px;
-                padding: 15px;
-                text-align: center;
-                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            }}
-            .metric-val {{
-                font-size: 1.8rem;
-                font-weight: 700;
-                color: #00F2FE;
-            }}
-            .metric-lbl {{
-                font-size: 0.8rem;
-                color: #94A3B8;
-                text-transform: uppercase;
-                letter-spacing: 0.05em;
-            }}
-            .auth-card {{
-                background: rgba(22, 28, 38, 0.8);
-                border: 1px solid rgba(0, 242, 254, 0.2);
-                border-radius: 16px;
-                padding: 25px;
-                box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
-            }}
-            .stButton>button {{
-                background: linear-gradient(135deg, #00F2FE 0%, #4FACFE 100%) !important;
-                color: #0B0E17 !important;
-                font-weight: 600 !important;
-                border: none !important;
-                border-radius: 8px !important;
-                transition: all 0.2s ease !important;
-            }}
-            .stButton>button:hover {{
-                transform: translateY(-1px) !important;
-                box-shadow: 0 0 10px rgba(0, 242, 254, 0.3) !important;
-            }}
-            div[data-testid="stFileUploader"] {{
-                background: {card_bg} !important;
-                border: 1px dashed rgba(0, 242, 254, 0.3) !important;
-                border-radius: 12px !important;
-            }}
-            section[data-testid="stSidebar"] {{
-                background-color: {sidebar_bg} !important;
-                border-right: 1px solid rgba(0, 242, 254, 0.1) !important;
-            }}
-            hr {{
-                border-color: rgba(255, 255, 255, 0.05) !important;
-                margin: 20px 0 !important;
-            }}
-            </style>
-        """, unsafe_allow_html=True)
-    else:
-        bg_color = "#F8FAFC"
-        text_color = "#0F172A"
-        card_bg = "#FFFFFF"
-        card_border = "rgba(0, 0, 0, 0.08)"
-        sidebar_bg = "#F1F5F9"
-        st.markdown(f"""
-            <style>
-            @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
-            html, body, [class*="css"], .stApp {{
-                font-family: 'Outfit', sans-serif;
-                background-color: {bg_color} !important;
-                color: {text_color} !important;
-            }}
-            .title-container {{
-                text-align: center;
-                margin: 15px 0 25px 0;
-            }}
-            .glowing-title {{
-                font-size: 2.5rem !important;
-                font-weight: 700 !important;
-                background: linear-gradient(90deg, #4FACFE 0%, #000000 100%);
-                -webkit-background-clip: text;
-                -webkit-text-fill-color: transparent;
-            }}
-            .subtitle {{
-                font-size: 0.95rem;
-                color: #64748B;
-                font-weight: 300;
-            }}
-            .metric-card {{
-                background: {card_bg};
-                border: 1px solid {card_border};
-                border-radius: 12px;
-                padding: 15px;
-                text-align: center;
-                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-            }}
-            .metric-val {{
-                font-size: 1.8rem;
-                font-weight: 700;
-                color: #4FACFE;
-            }}
-            .metric-lbl {{
-                font-size: 0.8rem;
-                color: #64748B;
-                text-transform: uppercase;
-                letter-spacing: 0.05em;
-            }}
-            .auth-card {{
-                background: #FFFFFF;
-                border: 1px solid rgba(0, 0, 0, 0.1);
-                border-radius: 16px;
-                padding: 25px;
-                box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
-            }}
-            .stButton>button {{
-                background: linear-gradient(135deg, #4FACFE 0%, #00F2FE 100%) !important;
-                color: #FFFFFF !important;
-                font-weight: 600 !important;
-                border: none !important;
-                border-radius: 8px !important;
-                transition: all 0.2s ease !important;
-            }}
-            .stButton>button:hover {{
-                transform: translateY(-1px) !important;
-                box-shadow: 0 0 10px rgba(79, 172, 254, 0.3) !important;
-            }}
-            div[data-testid="stFileUploader"] {{
-                background: {card_bg} !important;
-                border: 1px dashed rgba(79, 172, 254, 0.4) !important;
-                border-radius: 12px !important;
-            }}
-            section[data-testid="stSidebar"] {{
-                background-color: {sidebar_bg} !important;
-                border-right: 1px solid rgba(0, 0, 0, 0.08) !important;
-            }}
-            hr {{
-                border-color: rgba(0, 0, 0, 0.08) !important;
-                margin: 20px 0 !important;
-            }}
-            </style>
-        """, unsafe_allow_html=True)
+    """Apply a refined, theme-aware visual system with subtle motion."""
+    dark = st.session_state.theme == "Dark"
+    bg_color = "#0D1117" if dark else "#F5F6FA"
+    text_color = "#E8EAF0" if dark else "#202435"
+    sidebar_bg = "#10151E" if dark else "#FFFFFF"
+    card_bg = "rgba(23, 29, 41, 0.88)" if dark else "rgba(255, 255, 255, 0.92)"
+    card_border = "rgba(194, 166, 110, 0.20)" if dark else "rgba(43, 55, 84, 0.10)"
+    muted = "#9AA3B2" if dark else "#737B8C"
+    accent = "#C9A96E"
+    st.markdown(f"""
+        <style>
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
+        :root {{ --accent: {accent}; --surface: {card_bg}; --muted: {muted}; }}
+        html, body, [class*="css"], .stApp {{ font-family: 'DM Sans', sans-serif; background-color: {bg_color} !important; color: {text_color} !important; }}
+        .stApp {{ animation: app-enter .55s ease both; }}
+        @keyframes app-enter {{ from {{ opacity: 0; }} to {{ opacity: 1; }} }}
+        @keyframes rise-in {{ from {{ opacity: 0; transform: translateY(12px); }} to {{ opacity: 1; transform: translateY(0); }} }}
+        .title-container {{ text-align: left; margin: 12px 0 28px; animation: rise-in .55s ease both; }}
+        .glowing-title {{ font: 700 2.45rem 'Playfair Display', Georgia, serif !important; color: {text_color} !important; letter-spacing: -.035em; }}
+        .subtitle {{ font-size: .98rem; color: {muted}; font-weight: 400; }}
+        .metric-card {{ background: linear-gradient(145deg, {card_bg}, transparent), {card_bg}; border: 1px solid {card_border}; border-radius: 16px; padding: 20px 18px; text-align: left; box-shadow: 0 12px 30px rgba(0,0,0,.08); transition: transform .22s ease, border-color .22s ease, box-shadow .22s ease; animation: rise-in .5s ease both; }}
+        .metric-card:hover {{ transform: translateY(-4px); border-color: rgba(201,169,110,.55); box-shadow: 0 16px 34px rgba(0,0,0,.14); }}
+        .metric-val {{ font-size: 2rem; font-weight: 700; color: {accent}; font-variant-numeric: tabular-nums; }}
+        .metric-lbl {{ font-size: .73rem; color: {muted}; text-transform: uppercase; letter-spacing: .10em; }}
+        .auth-card {{ background: {card_bg}; border: 1px solid {card_border}; border-radius: 20px; padding: 28px; box-shadow: 0 20px 55px rgba(0,0,0,.15); }}
+        .stButton>button, .stDownloadButton>button {{ border-radius: 10px !important; border: 1px solid rgba(201,169,110,.44) !important; color: {text_color} !important; background: linear-gradient(135deg, rgba(201,169,110,.20), rgba(201,169,110,.08)) !important; font-weight: 600 !important; transition: transform .18s ease, box-shadow .18s ease, background .18s ease !important; }}
+        .stButton>button:hover, .stDownloadButton>button:hover {{ transform: translateY(-2px) !important; box-shadow: 0 8px 22px rgba(201,169,110,.18) !important; border-color: {accent} !important; }}
+        [data-testid="stMetric"], [data-testid="stExpander"], [data-testid="stForm"] {{ border-radius: 14px; }}
+        [data-testid="stPlotlyChart"] {{ border: 1px solid {card_border}; border-radius: 16px; padding: 8px; background: {card_bg}; animation: rise-in .45s ease both; }}
+        div[data-testid="stFileUploader"] {{ background: {card_bg} !important; border: 1px dashed rgba(201,169,110,.48) !important; border-radius: 14px !important; }}
+        section[data-testid="stSidebar"] {{ background-color: {sidebar_bg} !important; border-right: 1px solid {card_border} !important; }}
+        section[data-testid="stSidebar"] h2 {{ font-family: 'Playfair Display', Georgia, serif; }}
+        hr {{ border-color: {card_border} !important; margin: 22px 0 !important; }}
+        .stButton>button:focus-visible, .stDownloadButton>button:focus-visible {{ outline: 2px solid #C9A96E !important; outline-offset: 3px; }}
+        .stButton>button:active, .stDownloadButton>button:active {{ transform: translateY(0) scale(.985) !important; }}
+        div[data-baseweb="select"]:focus-within {{ box-shadow: 0 0 0 2px rgba(201,169,110,.28); border-radius: 10px; }}
+        input:focus, textarea:focus {{ border-color: #C9A96E !important; box-shadow: 0 0 0 1px rgba(201,169,110,.22) !important; }}
+        [data-testid="stRadio"] input {{ accent-color: #C9A96E; }}
+        [data-testid="stCheckbox"] input {{ accent-color: #C9A96E; }}
+        [data-testid="stToggle"] {{ transition: filter .2s ease; }}
+        [data-testid="stToggle"]:hover {{ filter: brightness(1.12); }}
+        section[data-testid="stSidebar"] [data-testid="stSidebarNavLink"] {{ border-radius: 10px; transition: background .18s ease, transform .18s ease; }}
+        section[data-testid="stSidebar"] [data-testid="stSidebarNavLink"]:hover {{ background: rgba(201,169,110,.10); transform: translateX(2px); }}
+        section[data-testid="stSidebar"] [data-testid="stSidebarNavLink"][aria-current="page"] {{ background: rgba(201,169,110,.13); border-left: 2px solid #C9A96E; }}
+        [data-testid="stExpander"] {{ border: 1px solid {card_border}; background: {card_bg}; }}
+        [data-baseweb="tab"][aria-selected="true"] {{ color: #C9A96E !important; }}
+        [data-baseweb="tab-highlight"] {{ background-color: #C9A96E !important; }}
+        [data-testid="stPlotlyChart"] {{ transition: border-color .2s ease, box-shadow .2s ease; }}
+        [data-testid="stPlotlyChart"]:hover {{ border-color: rgba(201,169,110,.42); box-shadow: 0 10px 28px rgba(0,0,0,.10); }}
+        div[data-testid="stFileUploader"] {{ transition: border-color .2s ease, background .2s ease; }}
+        div[data-testid="stFileUploader"]:hover {{ border-color: #C9A96E !important; }}
+        [data-testid="stDataFrame"], [data-testid="stTable"] {{ border-radius: 12px; overflow: hidden; }}
+        [data-testid="stVerticalBlock"] > [data-testid="stElementContainer"] {{ scroll-margin-top: 1rem; }}
+        @media (max-width: 720px) {{ .glowing-title {{ font-size: 2rem !important; }} .title-container {{ margin-bottom: 20px; }} }}
+        @media (max-width: 720px) {{ [data-testid="stPlotlyChart"] {{ padding: 4px; border-radius: 12px; }} .metric-card {{ padding: 16px; }} }}
+        .metric-lbl {{ transition: color .2s ease; }}
+        .metric-card:hover .metric-lbl {{ color: {text_color}; }}
+        section[data-testid="stSidebar"] h2 {{ letter-spacing: -.02em; }}
+        @media (prefers-reduced-motion: reduce) {{ *, *::before, *::after {{ animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }} }}
+        </style>
+    """, unsafe_allow_html=True)
 
 # Helper: Style Plotly Figures globally based on theme preference
 def style_plotly_fig(fig):
-    theme_template = "plotly_dark" if st.session_state.theme == "Dark" else "plotly"
+    theme_template = "plotly_dark" if st.session_state.theme == "Dark" else "plotly_white"
     bg = "rgba(0,0,0,0)"
-    font_color = "#F8FAFC" if st.session_state.theme == "Dark" else "#0F172A"
-    grid_color = "rgba(255,255,255,0.05)" if st.session_state.theme == "Dark" else "rgba(0,0,0,0.05)"
+    font_color = "#E8EAF0" if st.session_state.theme == "Dark" else "#202435"
+    grid_color = "rgba(255,255,255,0.075)" if st.session_state.theme == "Dark" else "rgba(32,36,53,0.08)"
     
     fig.update_layout(
         template=theme_template,
@@ -297,9 +192,49 @@ def style_plotly_fig(fig):
         margin=dict(l=40, r=40, t=50, b=40),
         xaxis=dict(gridcolor=grid_color),
         yaxis=dict(gridcolor=grid_color),
-        colorway=["#00F2FE", "#D946EF", "#10B981", "#3B82F6", "#F59E0B"]
+        colorway=["#C9A96E", "#7797B8", "#91A68A", "#B88778", "#9B8CB5"],
+        transition={"duration": 450, "easing": "cubic-in-out"},
+        hoverlabel=dict(bgcolor="#1B2230", font_color="#F5F6FA", bordercolor="#C9A96E")
     )
     return fig
+
+def build_chart(df, spec):
+    """Build a chart consistently for both the preview and pinned dashboard."""
+    chart_type = spec["type"]
+    x_col, y_col = spec.get("x"), spec.get("y")
+    color = spec.get("color") or None
+    size = spec.get("size") or None
+    title = f"{chart_type} · {x_col}" + (f" vs {y_col}" if y_col else "")
+    if chart_type == "Scatter":
+        fig = px.scatter(df, x=x_col, y=y_col, color=color, size=size, title=title)
+    elif chart_type == "Line":
+        fig = px.line(df, x=x_col, y=y_col, color=color, title=title)
+    elif chart_type == "Bar":
+        fig = px.bar(df, x=x_col, y=y_col, color=color, title=title)
+    elif chart_type == "Histogram":
+        fig = px.histogram(df, x=x_col, color=color, title=title)
+    elif chart_type == "Box":
+        fig = px.box(df, x=x_col, y=y_col, color=color, title=title)
+    elif chart_type == "Correlation Matrix":
+        numeric = df.select_dtypes(include=["number"])
+        if numeric.shape[1] < 2:
+            return None
+        fig = px.imshow(numeric.corr(), text_auto=".2f", color_continuous_scale="RdBu_r", title="Correlation matrix")
+    elif chart_type == "Bubble":
+        if not size:
+            return None
+        fig = px.scatter(df, x=x_col, y=y_col, color=color, size=size, size_max=50, title=title)
+    elif chart_type == "Treemap":
+        fig = px.treemap(df, path=[x_col], color=color, title=title)
+    elif chart_type == "Radar":
+        if not y_col:
+            return None
+        grouped = df.groupby(x_col, dropna=False)[y_col].mean().reset_index()
+        fig = px.line_polar(grouped, r=y_col, theta=x_col, line_close=True, title=title)
+    else:
+        return None
+    return style_plotly_fig(fig)
+
 
 # Helper: Load dataset and update metrics
 def setup_active_dataset(df, filename):
@@ -817,7 +752,7 @@ else:
                             
                     if fig:
                         fig = style_plotly_fig(fig)
-                        st.plotly_chart(fig, use_container_width=True)
+                        st.plotly_chart(fig, use_container_width=True, config={"displaylogo": False, "scrollZoom": True, "modeBarButtonsToAdd": ["drawline", "eraseshape"]})
                         
                         # Standalone exports
                         buffer = io.StringIO()
@@ -847,98 +782,56 @@ else:
                 except Exception as e:
                     st.error(f"Plot construction failed: {e}")
                     
-            # Render Active Dashboard layout at the bottom
+            # Render the pinned dashboard with live categorical filters.
             if st.session_state.dashboards:
                 st.divider()
-                st.subheader("📌 Custom Dashboard Layout Builder")
-                
-                # Real-Time Ticker / Simulator
-                rt_active = st.checkbox("🔄 Enable Real-Time 5s Auto-Refresh")
-                if rt_active:
-                    st.caption("Live feed simulation active. Rerunning dashboard stats every 5 seconds.")
-                    st.schedule("duration_seconds='5'", prompt="Simulate active feed updates")
-                    
-                col_layout = []
-                idx = 0
-                while idx < len(st.session_state.dashboards):
-                    card = st.session_state.dashboards[idx]
-                    
-                    if card["width"] == "Full-Width (100%)":
-                        st.markdown(f"**Widget {idx+1}: {card['type']}**")
-                        # Build and display plot
-                        try:
-                            w_fig = None
-                            if card["type"] == "Scatter":
-                                w_fig = px.scatter(df, x=card["x"], y=card["y"], color=card["color"], size=card["size"])
-                            elif card["type"] == "Line":
-                                w_fig = px.line(df, x=card["x"], y=card["y"], color=card["color"])
-                            elif card["type"] == "Bar":
-                                w_fig = px.bar(df, x=card["x"], y=card["y"], color=card["color"])
-                            elif card["type"] == "Histogram":
-                                w_fig = px.histogram(df, x=card["x"], color=card["color"])
-                            elif card["type"] == "Box":
-                                w_fig = px.box(df, x=card["x"], y=card["y"], color=card["color"])
-                            elif card["type"] == "Treemap":
-                                w_fig = px.treemap(df, path=[card["x"]])
-                            elif card["type"] == "Radar":
-                                radar_df = df.groupby(card["x"])[card["y"]].mean().reset_index()
-                                w_fig = px.line_polar(radar_df, r=card["y"], theta=card["x"], line_close=True)
-                                
-                            if w_fig:
-                                w_fig = style_plotly_fig(w_fig)
-                                st.plotly_chart(w_fig, use_container_width=True)
-                        except:
-                            st.caption("Unable to draw this widget layout.")
-                        if st.button(f"Remove Widget {idx+1}", key=f"del_{idx}"):
-                            st.session_state.dashboards.pop(idx)
-                            st.rerun()
-                        idx += 1
-                    else:
-                        # Side-by-side Half widgets
-                        if idx + 1 < len(st.session_state.dashboards) and st.session_state.dashboards[idx+1]["width"] == "Half-Width (50%)":
-                            # Render two side-by-side
-                            c1, c2 = st.columns(2)
-                            card1, card2 = st.session_state.dashboards[idx], st.session_state.dashboards[idx+1]
-                            
-                            with c1:
-                                st.markdown(f"**Widget {idx+1}: {card1['type']}**")
-                                try:
-                                    w_fig = px.histogram(df, x=card1["x"]) if card1["type"]=="Histogram" else px.scatter(df, x=card1["x"], y=card1["y"], color=card1["color"])
-                                    w_fig = style_plotly_fig(w_fig)
-                                    st.plotly_chart(w_fig, use_container_width=True)
-                                except:
-                                    pass
-                                if st.button(f"Remove Widget {idx+1}", key=f"del_{idx}"):
-                                    st.session_state.dashboards.pop(idx)
-                                    st.rerun()
-                                    
-                            with c2:
-                                st.markdown(f"**Widget {idx+2}: {card2['type']}**")
-                                try:
-                                    w_fig = px.histogram(df, x=card2["x"]) if card2["type"]=="Histogram" else px.scatter(df, x=card2["x"], y=card2["y"], color=card2["color"])
-                                    w_fig = style_plotly_fig(w_fig)
-                                    st.plotly_chart(w_fig, use_container_width=True)
-                                except:
-                                    pass
-                                if st.button(f"Remove Widget {idx+2}", key=f"del_{idx+1}"):
-                                    st.session_state.dashboards.pop(idx+1)
-                                    st.rerun()
-                            idx += 2
-                        else:
-                            # Render single widget as full since there's no matching half adjacent
-                            st.markdown(f"**Widget {idx+1}: {card['type']}**")
-                            try:
-                                w_fig = px.histogram(df, x=card["x"]) if card["type"]=="Histogram" else px.scatter(df, x=card["x"], y=card["y"], color=card["color"])
-                                w_fig = style_plotly_fig(w_fig)
-                                st.plotly_chart(w_fig, use_container_width=True)
-                            except:
-                                pass
-                            if st.button(f"Remove Widget {idx+1}", key=f"del_{idx}"):
-                                st.session_state.dashboards.pop(idx)
-                                st.rerun()
-                            idx += 1
+                st.subheader("📌 Your interactive dashboard")
+                st.caption(f"{len(st.session_state.dashboards)} pinned visualizations · hover, zoom, pan, and select chart elements to explore")
 
-    # ---------------------------------------------
+                categorical_cols = df.select_dtypes(exclude=["number", "datetime", "datetimetz"]).columns.tolist()
+                if categorical_cols:
+                    with st.expander("Filter dashboard data", expanded=False):
+                        filter_col = st.selectbox("Filter by category", ["No filter"] + categorical_cols, key="dashboard_filter_col")
+                        if filter_col != "No filter":
+                            values = df[filter_col].dropna().unique().tolist()
+                            selected = st.multiselect("Visible values", values, default=values, key="dashboard_filter_values")
+                            df = df[df[filter_col].isin(selected)]
+                            st.caption(f"Showing {len(df):,} of {len(st.session_state.df):,} rows")
+
+                if df.empty:
+                    st.info("No rows match the selected filter. Choose more values to see your charts.")
+                else:
+                    index = 0
+                    while index < len(st.session_state.dashboards):
+                        current = st.session_state.dashboards[index]
+                        if current["width"] == "Full-Width (100%)":
+                            group = [(index, current)]
+                        elif index + 1 < len(st.session_state.dashboards) and st.session_state.dashboards[index + 1]["width"] == "Half-Width (50%)":
+                            group = [(index, current), (index + 1, st.session_state.dashboards[index + 1])]
+                        else:
+                            group = [(index, current)]
+                        columns = st.columns(len(group))
+                        for col, (widget_index, card) in zip(columns, group):
+                            with col:
+                                with st.container(border=True):
+                                    st.markdown(f"**{widget_index + 1:02d} · {card['type']}**")
+                                    try:
+                                        chart = build_chart(df, card)
+                                        if chart is not None:
+                                            st.plotly_chart(chart, use_container_width=True, key=f"dashboard_chart_{widget_index}", config={"displaylogo": False, "scrollZoom": True, "modeBarButtonsToAdd": ["drawline", "eraseshape"]})
+                                        else:
+                                            st.info("This chart needs more numeric columns or a size field.")
+                                    except Exception as error:
+                                        st.caption(f"Unable to draw this chart: {error}")
+                                    if st.button("Remove from dashboard", key=f"del_{widget_index}"):
+                                        st.session_state.dashboards.pop(widget_index)
+                                        st.rerun()
+                        index += len(group)
+
+                if st.button("Clear dashboard", type="secondary", key="clear_dashboard"):
+                    st.session_state.dashboards.clear()
+                    st.rerun()
+
     # 🧠 AI ANALYTICS DESK PAGE
     # ---------------------------------------------
     elif page == "🧠 AI Analytics Desk":
