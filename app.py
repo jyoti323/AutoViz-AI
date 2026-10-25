@@ -170,6 +170,8 @@ def apply_theme_css():
         [data-testid="stVerticalBlock"] > [data-testid="stElementContainer"] {{ scroll-margin-top: 1rem; }}
         @media (max-width: 720px) {{ .glowing-title {{ font-size: 2rem !important; }} .title-container {{ margin-bottom: 20px; }} }}
         @media (max-width: 720px) {{ [data-testid="stPlotlyChart"] {{ padding: 4px; border-radius: 12px; }} .metric-card {{ padding: 16px; }} }}
+        .metric-lbl {{ transition: color .2s ease; }}
+        .metric-card:hover .metric-lbl {{ color: {text_color}; }}
         @media (prefers-reduced-motion: reduce) {{ *, *::before, *::after {{ animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }} }}
         </style>
     """, unsafe_allow_html=True)
