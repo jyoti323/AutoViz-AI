@@ -151,6 +151,7 @@ def apply_theme_css():
         .stButton>button:focus-visible, .stDownloadButton>button:focus-visible {{ outline: 2px solid #C9A96E !important; outline-offset: 3px; }}
         .stButton>button:active, .stDownloadButton>button:active {{ transform: translateY(0) scale(.985) !important; }}
         div[data-baseweb="select"]:focus-within {{ box-shadow: 0 0 0 2px rgba(201,169,110,.28); border-radius: 10px; }}
+        input:focus, textarea:focus {{ border-color: #C9A96E !important; box-shadow: 0 0 0 1px rgba(201,169,110,.22) !important; }}
         @media (prefers-reduced-motion: reduce) {{ *, *::before, *::after {{ animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }} }}
         </style>
     """, unsafe_allow_html=True)
