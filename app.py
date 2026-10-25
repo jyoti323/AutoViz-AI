@@ -158,6 +158,7 @@ def apply_theme_css():
         [data-testid="stToggle"]:hover {{ filter: brightness(1.12); }}
         section[data-testid="stSidebar"] [data-testid="stSidebarNavLink"] {{ border-radius: 10px; transition: background .18s ease, transform .18s ease; }}
         section[data-testid="stSidebar"] [data-testid="stSidebarNavLink"]:hover {{ background: rgba(201,169,110,.10); transform: translateX(2px); }}
+        section[data-testid="stSidebar"] [data-testid="stSidebarNavLink"][aria-current="page"] {{ background: rgba(201,169,110,.13); border-left: 2px solid #C9A96E; }}
         @media (prefers-reduced-motion: reduce) {{ *, *::before, *::after {{ animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }} }}
         </style>
     """, unsafe_allow_html=True)
