@@ -782,7 +782,11 @@ else:
                         if filter_col != "No filter":
                             values = df[filter_col].dropna().unique().tolist()
                             selected = st.multiselect("Visible values", values, default=values, key="dashboard_filter_values")
-                            df = df[df[filter_col].isin(selected)]
+                            include_missing = st.checkbox("Include blank values", value=True, key="dashboard_filter_missing")
+                            selected_rows = df[filter_col].isin(selected)
+                            if include_missing:
+                                selected_rows |= df[filter_col].isna()
+                            df = df[selected_rows]
                             st.caption(f"Showing {len(df):,} of {len(st.session_state.df):,} rows")
 
                 if df.empty:
