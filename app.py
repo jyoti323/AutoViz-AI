@@ -689,6 +689,8 @@ else:
                 if chart_choice in ["Scatter", "Bubble"]:
                     size_by = st.selectbox("Marker Size (Numeric)", ["None"] + df.select_dtypes(include=['number']).columns.tolist())
                     size_field = None if size_by == "None" else size_by
+
+                chart_title = st.text_input("Chart title (optional)", placeholder=f"{chart_choice} · {x_col}")
                     
                 st.markdown("---")
                 
@@ -707,6 +709,7 @@ else:
                             "y": y_col,
                             "color": color_field,
                             "size": size_field if 'size_field' in locals() else None,
+                            "title": chart_title.strip() or None,
                             "width": widget_width
                         })
                         st.session_state.global_stats["charts"] += 1
@@ -718,7 +721,7 @@ else:
                 try:
                     fig = build_chart(df, {
                         "type": chart_choice, "x": x_col, "y": y_col,
-                        "color": color_field, "size": size_field,
+                        "color": color_field, "size": size_field, "title": chart_title.strip() or None,
                     })
                     if fig:
                         st.plotly_chart(fig, use_container_width=True, config={"displaylogo": False, "scrollZoom": True, "modeBarButtonsToAdd": ["drawline", "eraseshape"]})
