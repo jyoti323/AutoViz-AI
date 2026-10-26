@@ -767,6 +767,14 @@ else:
                 st.subheader("📌 Your interactive dashboard")
                 st.caption(f"{len(st.session_state.dashboards)} pinned visualizations · hover, zoom, pan, and select chart elements to explore")
 
+                total_rows = len(st.session_state.df)
+                missing_cells = int(st.session_state.df.isna().sum().sum())
+                stat_cols = st.columns(4)
+                stat_cols[0].metric("Dataset rows", f"{total_rows:,}")
+                stat_cols[1].metric("Fields", f"{st.session_state.df.shape[1]:,}")
+                stat_cols[2].metric("Missing cells", f"{missing_cells:,}")
+                stat_cols[3].metric("Pinned charts", f"{len(st.session_state.dashboards):,}")
+
                 categorical_cols = df.select_dtypes(exclude=["number", "datetime", "datetimetz"]).columns.tolist()
                 if categorical_cols:
                     with st.expander("Filter dashboard data", expanded=False):
