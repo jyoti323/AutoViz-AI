@@ -204,7 +204,7 @@ def build_chart(df, spec):
     x_col, y_col = spec.get("x"), spec.get("y")
     color = spec.get("color") or None
     size = spec.get("size") or None
-    title = f"{chart_type} · {x_col}" + (f" vs {y_col}" if y_col else "")
+    title = spec.get("title") or (f"{chart_type} · {x_col}" + (f" vs {y_col}" if y_col else ""))
     if chart_type == "Scatter":
         fig = px.scatter(df, x=x_col, y=y_col, color=color, size=size, title=title)
     elif chart_type == "Line":
@@ -685,6 +685,7 @@ else:
                 color_field = None if color_by == "None" else color_by
                 
                 size_by = None
+                size_field = None
                 if chart_choice in ["Scatter", "Bubble"]:
                     size_by = st.selectbox("Marker Size (Numeric)", ["None"] + df.select_dtypes(include=['number']).columns.tolist())
                     size_field = None if size_by == "None" else size_by
@@ -714,47 +715,22 @@ else:
             with v_col2:
                 st.subheader("Visualizer Output Preview")
                 
-                # Render logic
                 try:
-                    fig = None
-                    title = f"{chart_choice} of {x_col}" + (f" vs {y_col}" if y_col else "")
-                    
-                    if chart_choice == "Scatter":
-                        fig = px.scatter(df, x=x_col, y=y_col, color=color_field, size=size_by if size_by != "None" else None, title=title)
-                    elif chart_choice == "Line":
-                        fig = px.line(df, x=x_col, y=y_col, color=color_field, title=title)
-                    elif chart_choice == "Bar":
-                        fig = px.bar(df, x=x_col, y=y_col, color=color_field, title=title)
-                    elif chart_choice == "Histogram":
-                        fig = px.histogram(df, x=x_col, color=color_field, title=title)
-                    elif chart_choice == "Box":
-                        fig = px.box(df, x=x_col, y=y_col, color=color_field, title=title)
-                    elif chart_choice == "Correlation Matrix":
-                        num_cols = df.select_dtypes(include=['number']).columns.tolist()
-                        if len(num_cols) >= 2:
-                            fig = px.imshow(df[num_cols].corr(), text_auto=".2f", color_continuous_scale="RdBu_r", title="Pearson Correlation Coefficients")
-                        else:
-                            st.info("Correlation Matrix requires 2+ numerical columns.")
-                    elif chart_choice == "Bubble":
-                        if size_by != "None":
-                            fig = px.scatter(df, x=x_col, y=y_col, color=color_field, size=size_by, size_max=50, title=title)
-                        else:
-                            st.warning("Please configure a numeric sizing variable for Bubble charts.")
-                    elif chart_choice == "Treemap":
-                        fig = px.treemap(df, path=[x_col], title=title)
-                    elif chart_choice == "Radar":
-                        if y_col:
-                            # Aggregate to prevent multi-point overlap
-                            radar_df = df.groupby(x_col)[y_col].mean().reset_index()
-                            fig = px.line_polar(radar_df, r=y_col, theta=x_col, line_close=True, title=title)
-                        else:
-                            st.warning("Radar chart requires X (category) and Y (metric) variables.")
-                            
+                    fig = build_chart(df, {
+                        "type": chart_choice, "x": x_col, "y": y_col,
+                        "color": color_field, "size": size_field,
+                    })
                     if fig:
-                        fig = style_plotly_fig(fig)
                         st.plotly_chart(fig, use_container_width=True, config={"displaylogo": False, "scrollZoom": True, "modeBarButtonsToAdd": ["drawline", "eraseshape"]})
+                    elif chart_choice == "Correlation Matrix":
+                        st.info("Correlation Matrix requires 2+ numerical columns.")
+                    elif chart_choice == "Bubble":
+                        st.warning("Please configure a numeric sizing variable for Bubble charts.")
+                    elif chart_choice == "Radar":
+                        st.warning("Radar chart requires X (category) and Y (metric) variables.")
                         
                         # Standalone exports
+                    if fig:
                         buffer = io.StringIO()
                         fig.write_html(buffer, include_plotlyjs="cdn")
                         html_bytes = buffer.getvalue().encode()
