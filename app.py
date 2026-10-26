@@ -236,6 +236,13 @@ def build_chart(df, spec):
     return style_plotly_fig(fig)
 
 
+def reset_dashboard_filters():
+    """Restore dashboard filters to their initial, unfiltered state."""
+    st.session_state["dashboard_filter_col"] = "No filter"
+    st.session_state["dashboard_filter_values"] = []
+    st.session_state["dashboard_filter_missing"] = True
+
+
 # Helper: Load dataset and update metrics
 def setup_active_dataset(df, filename):
     st.session_state.df = df
@@ -778,6 +785,7 @@ else:
                 categorical_cols = df.select_dtypes(exclude=["number", "datetime", "datetimetz"]).columns.tolist()
                 if categorical_cols:
                     with st.expander("Filter dashboard data", expanded=False):
+                        st.button("Reset filters", key="reset_dashboard_filters", on_click=reset_dashboard_filters)
                         filter_col = st.selectbox("Filter by category", ["No filter"] + categorical_cols, key="dashboard_filter_col")
                         if filter_col != "No filter":
                             values = df[filter_col].dropna().unique().tolist()
