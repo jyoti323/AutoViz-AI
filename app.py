@@ -836,7 +836,17 @@ else:
                                             st.info("This chart needs more numeric columns or a size field.")
                                     except Exception as error:
                                         st.caption(f"Unable to draw this chart: {error}")
-                                    duplicate_col, remove_col = st.columns(2)
+                                    move_up_col, move_down_col, duplicate_col, remove_col = st.columns(4)
+                                    with move_up_col:
+                                        if st.button("↑", key=f"move_up_{widget_index}", disabled=widget_index == 0, help="Move chart earlier"):
+                                            widgets = st.session_state.dashboards
+                                            widgets[widget_index - 1], widgets[widget_index] = widgets[widget_index], widgets[widget_index - 1]
+                                            st.rerun()
+                                    with move_down_col:
+                                        if st.button("↓", key=f"move_down_{widget_index}", disabled=widget_index == len(st.session_state.dashboards) - 1, help="Move chart later"):
+                                            widgets = st.session_state.dashboards
+                                            widgets[widget_index], widgets[widget_index + 1] = widgets[widget_index + 1], widgets[widget_index]
+                                            st.rerun()
                                     with duplicate_col:
                                         if st.button("Duplicate", key=f"duplicate_{widget_index}"):
                                             st.session_state.dashboards.insert(widget_index + 1, {**card})
