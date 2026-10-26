@@ -781,6 +781,7 @@ else:
                 stat_cols[1].metric("Fields", f"{st.session_state.df.shape[1]:,}")
                 stat_cols[2].metric("Missing cells", f"{missing_cells:,}")
                 stat_cols[3].metric("Pinned charts", f"{len(st.session_state.dashboards):,}")
+                layout_columns = st.radio("Dashboard columns", [1, 2], index=1, horizontal=True, key="dashboard_grid_columns")
 
                 categorical_cols = df.select_dtypes(exclude=["number", "datetime", "datetimetz"]).columns.tolist()
                 if categorical_cols:
@@ -811,7 +812,7 @@ else:
                     index = 0
                     while index < len(st.session_state.dashboards):
                         current = st.session_state.dashboards[index]
-                        if current["width"] == "Full-Width (100%)":
+                        if layout_columns == 1 or current["width"] == "Full-Width (100%)":
                             group = [(index, current)]
                         elif index + 1 < len(st.session_state.dashboards) and st.session_state.dashboards[index + 1]["width"] == "Half-Width (50%)":
                             group = [(index, current), (index + 1, st.session_state.dashboards[index + 1])]
