@@ -797,6 +797,14 @@ else:
                             df = df[selected_rows]
                             st.caption(f"Showing {len(df):,} of {len(st.session_state.df):,} rows")
 
+                st.download_button(
+                    "Download filtered CSV",
+                    data=df.to_csv(index=False).encode("utf-8"),
+                    file_name="dashboard_filtered.csv",
+                    mime="text/csv",
+                    key="dashboard_filtered_csv",
+                )
+
                 if df.empty:
                     st.info("No rows match the selected filter. Choose more values to see your charts.")
                 else:
