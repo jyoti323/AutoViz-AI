@@ -836,9 +836,16 @@ else:
                                             st.info("This chart needs more numeric columns or a size field.")
                                     except Exception as error:
                                         st.caption(f"Unable to draw this chart: {error}")
-                                    if st.button("Remove from dashboard", key=f"del_{widget_index}"):
-                                        st.session_state.dashboards.pop(widget_index)
-                                        st.rerun()
+                                    duplicate_col, remove_col = st.columns(2)
+                                    with duplicate_col:
+                                        if st.button("Duplicate", key=f"duplicate_{widget_index}"):
+                                            st.session_state.dashboards.insert(widget_index + 1, {**card})
+                                            st.session_state.global_stats["charts"] += 1
+                                            st.rerun()
+                                    with remove_col:
+                                        if st.button("Remove", key=f"del_{widget_index}"):
+                                            st.session_state.dashboards.pop(widget_index)
+                                            st.rerun()
                         index += len(group)
 
                 if st.button("Clear dashboard", type="secondary", key="clear_dashboard"):
