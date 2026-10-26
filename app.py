@@ -823,8 +823,13 @@ else:
                             with col:
                                 with st.container(border=True):
                                     st.markdown(f"**{widget_index + 1:02d} · {card['type']}**")
+                                    widget_title = st.text_input(
+                                        "Widget title",
+                                        value=card.get("title") or "",
+                                        key=f"dashboard_title_{widget_index}",
+                                    )
                                     try:
-                                        chart = build_chart(df, card)
+                                        chart = build_chart(df, {**card, "title": widget_title.strip() or None})
                                         if chart is not None:
                                             st.plotly_chart(chart, use_container_width=True, key=f"dashboard_chart_{widget_index}", config={"displaylogo": False, "scrollZoom": True, "modeBarButtonsToAdd": ["drawline", "eraseshape"]})
                                         else:
