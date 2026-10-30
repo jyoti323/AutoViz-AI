@@ -117,62 +117,62 @@ def delete_user_file(username, filename):
 def apply_theme_css():
     """Apply a refined, theme-aware visual system with subtle motion."""
     dark = st.session_state.theme == "Dark"
-    bg_color = "#0D1117" if dark else "#F5F6FA"
-    text_color = "#E8EAF0" if dark else "#202435"
-    sidebar_bg = "#10151E" if dark else "#FFFFFF"
-    card_bg = "rgba(23, 29, 41, 0.88)" if dark else "rgba(255, 255, 255, 0.92)"
-    card_border = "rgba(194, 166, 110, 0.20)" if dark else "rgba(43, 55, 84, 0.10)"
-    muted = "#9AA3B2" if dark else "#737B8C"
-    accent = "#C9A96E"
+    bg_color = "#10131D" if dark else "#F4F5FA"
+    text_color = "#F2F3FA" if dark else "#20243A"
+    sidebar_bg = "#141824" if dark else "#FFFFFF"
+    card_bg = "rgba(28, 33, 49, 0.94)" if dark else "rgba(255, 255, 255, 0.96)"
+    card_border = "rgba(151, 139, 255, 0.20)" if dark else "rgba(71, 77, 117, 0.12)"
+    muted = "#A0A6BB" if dark else "#747B91"
+    accent = "#A99BFF" if dark else "#6757D9"
+    accent_rgb = "169, 155, 255" if dark else "103, 87, 217"
     st.markdown(f"""
         <style>
-        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap');
         :root {{ --accent: {accent}; --surface: {card_bg}; --muted: {muted}; }}
         html, body, [class*="css"], .stApp {{ font-family: 'DM Sans', sans-serif; background-color: {bg_color} !important; color: {text_color} !important; }}
-        .stApp {{ animation: app-enter .55s ease both; }}
+        .stApp {{ background-image: radial-gradient(ellipse at 6% 0%, rgba({accent_rgb}, .10), transparent 34%), radial-gradient(ellipse at 96% 10%, rgba(57, 198, 180, .07), transparent 30%); animation: app-enter .55s ease both; }}
         @keyframes app-enter {{ from {{ opacity: 0; }} to {{ opacity: 1; }} }}
         @keyframes rise-in {{ from {{ opacity: 0; transform: translateY(12px); }} to {{ opacity: 1; transform: translateY(0); }} }}
-        .title-container {{ text-align: left; margin: 12px 0 28px; animation: rise-in .55s ease both; }}
-        .glowing-title {{ font: 700 2.45rem 'Playfair Display', Georgia, serif !important; color: {text_color} !important; letter-spacing: -.035em; }}
-        .subtitle {{ font-size: .98rem; color: {muted}; font-weight: 400; }}
-        .metric-card {{ background: linear-gradient(145deg, {card_bg}, transparent), {card_bg}; border: 1px solid {card_border}; border-radius: 16px; padding: 20px 18px; text-align: left; box-shadow: 0 12px 30px rgba(0,0,0,.08); transition: transform .22s ease, border-color .22s ease, box-shadow .22s ease; animation: rise-in .5s ease both; }}
-        .metric-card:hover {{ transform: translateY(-4px); border-color: rgba(201,169,110,.55); box-shadow: 0 16px 34px rgba(0,0,0,.14); }}
-        .metric-val {{ font-size: 2rem; font-weight: 700; color: {accent}; font-variant-numeric: tabular-nums; }}
-        .metric-lbl {{ font-size: .73rem; color: {muted}; text-transform: uppercase; letter-spacing: .10em; }}
-        .auth-card {{ background: {card_bg}; border: 1px solid {card_border}; border-radius: 20px; padding: 28px; box-shadow: 0 20px 55px rgba(0,0,0,.15); }}
-        .stButton>button, .stDownloadButton>button {{ border-radius: 10px !important; border: 1px solid rgba(201,169,110,.44) !important; color: {text_color} !important; background: linear-gradient(135deg, rgba(201,169,110,.20), rgba(201,169,110,.08)) !important; font-weight: 600 !important; transition: transform .18s ease, box-shadow .18s ease, background .18s ease !important; }}
-        .stButton>button:hover, .stDownloadButton>button:hover {{ transform: translateY(-2px) !important; box-shadow: 0 8px 22px rgba(201,169,110,.18) !important; border-color: {accent} !important; }}
+        .title-container {{ text-align: left; margin: 12px 0 28px; padding: 4px 0 2px; animation: rise-in .55s ease both; }}
+        .glowing-title {{ font: 800 2.35rem 'Manrope', sans-serif !important; color: {text_color} !important; letter-spacing: -.045em; }}
+        .subtitle {{ font-size: .98rem; color: {muted}; font-weight: 400; line-height: 1.65; }}
+        h1, h2, h3 {{ font-family: 'Manrope', sans-serif !important; letter-spacing: -.025em; }}
+        .metric-card {{ position: relative; overflow: hidden; background: linear-gradient(145deg, rgba({accent_rgb}, .10), transparent 62%), {card_bg}; border: 1px solid {card_border}; border-radius: 18px; padding: 21px 20px; text-align: left; box-shadow: 0 12px 30px rgba(15,18,35,.09); transition: transform .22s ease, border-color .22s ease, box-shadow .22s ease; animation: rise-in .5s ease both; }}
+        .metric-card::before {{ content: ''; position: absolute; inset: 0 auto 0 0; width: 3px; background: linear-gradient(180deg, {accent}, #39C6B4); opacity: .85; }}
+        .metric-card:hover {{ transform: translateY(-4px); border-color: rgba({accent_rgb},.55); box-shadow: 0 18px 38px rgba(15,18,35,.16); }}
+        .metric-val {{ font: 800 2rem 'Manrope', sans-serif; color: {accent}; font-variant-numeric: tabular-nums; letter-spacing: -.04em; }}
+        .metric-lbl {{ font-size: .72rem; color: {muted}; text-transform: uppercase; letter-spacing: .11em; font-weight: 700; }}
+        .auth-card {{ background: linear-gradient(145deg, rgba({accent_rgb}, .08), transparent 45%), {card_bg}; border: 1px solid {card_border}; border-radius: 22px; padding: 28px; box-shadow: 0 24px 60px rgba(15,18,35,.16); }}
+        .stButton>button, .stDownloadButton>button {{ min-height: 2.65rem; border-radius: 11px !important; border: 1px solid rgba({accent_rgb},.40) !important; color: {text_color} !important; background: linear-gradient(135deg, rgba({accent_rgb},.22), rgba(57,198,180,.10)) !important; font-weight: 700 !important; transition: transform .18s ease, box-shadow .18s ease, background .18s ease !important; }}
+        .stButton>button:hover, .stDownloadButton>button:hover {{ transform: translateY(-2px) !important; box-shadow: 0 9px 24px rgba({accent_rgb},.20) !important; border-color: {accent} !important; }}
         [data-testid="stMetric"], [data-testid="stExpander"], [data-testid="stForm"] {{ border-radius: 14px; }}
-        [data-testid="stPlotlyChart"] {{ border: 1px solid {card_border}; border-radius: 16px; padding: 8px; background: {card_bg}; animation: rise-in .45s ease both; }}
-        div[data-testid="stFileUploader"] {{ background: {card_bg} !important; border: 1px dashed rgba(201,169,110,.48) !important; border-radius: 14px !important; }}
-        section[data-testid="stSidebar"] {{ background-color: {sidebar_bg} !important; border-right: 1px solid {card_border} !important; }}
-        section[data-testid="stSidebar"] h2 {{ font-family: 'Playfair Display', Georgia, serif; }}
+        [data-testid="stPlotlyChart"] {{ border: 1px solid {card_border}; border-radius: 18px; padding: 8px; background: {card_bg}; box-shadow: 0 10px 28px rgba(15,18,35,.06); animation: rise-in .45s ease both; }}
+        div[data-testid="stFileUploader"] {{ background: {card_bg} !important; border: 1px dashed rgba({accent_rgb},.48) !important; border-radius: 16px !important; }}
+        section[data-testid="stSidebar"] {{ background: {sidebar_bg} !important; border-right: 1px solid {card_border} !important; }}
+        section[data-testid="stSidebar"] h2 {{ font-family: 'Manrope', sans-serif; letter-spacing: -.04em; }}
         hr {{ border-color: {card_border} !important; margin: 22px 0 !important; }}
-        .stButton>button:focus-visible, .stDownloadButton>button:focus-visible {{ outline: 2px solid #C9A96E !important; outline-offset: 3px; }}
+        .stButton>button:focus-visible, .stDownloadButton>button:focus-visible {{ outline: 2px solid {accent} !important; outline-offset: 3px; }}
         .stButton>button:active, .stDownloadButton>button:active {{ transform: translateY(0) scale(.985) !important; }}
-        div[data-baseweb="select"]:focus-within {{ box-shadow: 0 0 0 2px rgba(201,169,110,.28); border-radius: 10px; }}
-        input:focus, textarea:focus {{ border-color: #C9A96E !important; box-shadow: 0 0 0 1px rgba(201,169,110,.22) !important; }}
-        [data-testid="stRadio"] input {{ accent-color: #C9A96E; }}
-        [data-testid="stCheckbox"] input {{ accent-color: #C9A96E; }}
+        div[data-baseweb="select"]:focus-within {{ box-shadow: 0 0 0 2px rgba({accent_rgb},.28); border-radius: 10px; }}
+        input:focus, textarea:focus {{ border-color: {accent} !important; box-shadow: 0 0 0 1px rgba({accent_rgb},.22) !important; }}
+        [data-testid="stRadio"] input, [data-testid="stCheckbox"] input {{ accent-color: {accent}; }}
         [data-testid="stToggle"] {{ transition: filter .2s ease; }}
         [data-testid="stToggle"]:hover {{ filter: brightness(1.12); }}
         section[data-testid="stSidebar"] [data-testid="stSidebarNavLink"] {{ border-radius: 10px; transition: background .18s ease, transform .18s ease; }}
-        section[data-testid="stSidebar"] [data-testid="stSidebarNavLink"]:hover {{ background: rgba(201,169,110,.10); transform: translateX(2px); }}
-        section[data-testid="stSidebar"] [data-testid="stSidebarNavLink"][aria-current="page"] {{ background: rgba(201,169,110,.13); border-left: 2px solid #C9A96E; }}
-        [data-testid="stExpander"] {{ border: 1px solid {card_border}; background: {card_bg}; }}
-        [data-baseweb="tab"][aria-selected="true"] {{ color: #C9A96E !important; }}
-        [data-baseweb="tab-highlight"] {{ background-color: #C9A96E !important; }}
+        section[data-testid="stSidebar"] [data-testid="stSidebarNavLink"]:hover {{ background: rgba({accent_rgb},.10); transform: translateX(2px); }}
+        section[data-testid="stSidebar"] [data-testid="stSidebarNavLink"][aria-current="page"] {{ background: rgba({accent_rgb},.13); border-left: 2px solid {accent}; }}
+        [data-testid="stExpander"] {{ border: 1px solid {card_border}; border-radius: 14px; background: {card_bg}; }}
+        [data-baseweb="tab"][aria-selected="true"] {{ color: {accent} !important; }}
+        [data-baseweb="tab-highlight"] {{ background-color: {accent} !important; }}
         [data-testid="stPlotlyChart"] {{ transition: border-color .2s ease, box-shadow .2s ease; }}
-        [data-testid="stPlotlyChart"]:hover {{ border-color: rgba(201,169,110,.42); box-shadow: 0 10px 28px rgba(0,0,0,.10); }}
+        [data-testid="stPlotlyChart"]:hover {{ border-color: rgba({accent_rgb},.42); box-shadow: 0 14px 34px rgba(15,18,35,.12); }}
         div[data-testid="stFileUploader"] {{ transition: border-color .2s ease, background .2s ease; }}
-        div[data-testid="stFileUploader"]:hover {{ border-color: #C9A96E !important; }}
+        div[data-testid="stFileUploader"]:hover {{ border-color: {accent} !important; }}
         [data-testid="stDataFrame"], [data-testid="stTable"] {{ border-radius: 12px; overflow: hidden; }}
         [data-testid="stVerticalBlock"] > [data-testid="stElementContainer"] {{ scroll-margin-top: 1rem; }}
-        @media (max-width: 720px) {{ .glowing-title {{ font-size: 2rem !important; }} .title-container {{ margin-bottom: 20px; }} }}
-        @media (max-width: 720px) {{ [data-testid="stPlotlyChart"] {{ padding: 4px; border-radius: 12px; }} .metric-card {{ padding: 16px; }} }}
+        @media (max-width: 720px) {{ .glowing-title {{ font-size: 1.9rem !important; }} .title-container {{ margin-bottom: 20px; }} [data-testid="stPlotlyChart"] {{ padding: 4px; border-radius: 13px; }} .metric-card {{ padding: 16px; }} }}
         .metric-lbl {{ transition: color .2s ease; }}
         .metric-card:hover .metric-lbl {{ color: {text_color}; }}
-        section[data-testid="stSidebar"] h2 {{ letter-spacing: -.02em; }}
         @media (prefers-reduced-motion: reduce) {{ *, *::before, *::after {{ animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }} }}
         </style>
     """, unsafe_allow_html=True)
@@ -192,9 +192,9 @@ def style_plotly_fig(fig):
         margin=dict(l=40, r=40, t=50, b=40),
         xaxis=dict(gridcolor=grid_color),
         yaxis=dict(gridcolor=grid_color),
-        colorway=["#C9A96E", "#7797B8", "#91A68A", "#B88778", "#9B8CB5"],
+        colorway=["#8D7CFF", "#36C9B0", "#FF9A72", "#62A7F8", "#D78BEA", "#E5BD63"],
         transition={"duration": 450, "easing": "cubic-in-out"},
-        hoverlabel=dict(bgcolor="#1B2230", font_color="#F5F6FA", bordercolor="#C9A96E")
+        hoverlabel=dict(bgcolor="#20263A", font_color="#F5F6FA", bordercolor="#8D7CFF")
     )
     return fig
 
@@ -267,7 +267,7 @@ def setup_active_dataset(df, filename):
 apply_theme_css()
 
 # Navigation panel layout in Sidebar
-st.sidebar.markdown("<h2 style='color: #00F2FE; margin: 0;'>AutoViz AI</h2>", unsafe_allow_html=True)
+st.sidebar.markdown("<h2 style='color: #A99BFF; margin: 0;'>AutoViz AI</h2>", unsafe_allow_html=True)
 st.sidebar.caption("Enterprise Analytics Portal")
 
 # Sidebar Theme Switcher
@@ -282,7 +282,7 @@ if not st.session_state.logged_in:
     with cent:
         st.markdown("""
             <div style="text-align: center; margin-bottom: 20px; margin-top: 40px;">
-                <h2 style="color: #00F2FE; margin-bottom: 0px;">AutoViz AI Portal</h2>
+                <h2 style="color: #A99BFF; margin-bottom: 0px;">AutoViz AI Portal</h2>
                 <p style="color: #94A3B8; font-size: 0.9rem;">Sign in or register to launch the analytics dashboard</p>
             </div>
         """, unsafe_allow_html=True)
